@@ -1,23 +1,18 @@
 // Wrap all code that interacts with the DOM in a call to jQuery to ensure that
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
-var displayTimeEl = $('#currentDay');
-
-function displayTime() {
-  var rightNow = dayjs().format('dddd, MMMM D');
-  displayTimeEl.text(rightNow);
-}
-displayTime();
-//all in the same function?
 
 $(function () {
+
+  var rightNow = dayjs().format('dddd, MMMM D');
+  $("#currentDay").text(rightNow);
 
   $('.saveBtn').on('click', function(){
     var timeBlock = $(this).parent().attr('id');
     var content = $(this).siblings("textarea").val();
     localStorage.setItem(timeBlock, JSON.stringify(content));
   })
-  // can this be written easier? took way to long
+ 
 });
 
 
