@@ -4,15 +4,23 @@
 
 $(function () {
 
-  var rightNow = dayjs().format('dddd, MMMM D');
-  $("#currentDay").text(rightNow);
+  var todaysDate = dayjs().format('dddd, MMMM D');
+  $("#currentDay").text(todaysDate); //used jQuery and dayjs to display todays date
 
   $('.saveBtn').on('click', function(){
-    var timeBlock = $(this).parent().attr('id');
+    var timeBlockSave = $(this).parent().attr('id');
     var content = $(this).siblings("textarea").val();
-    localStorage.setItem(timeBlock, JSON.stringify(content));
-  })
- 
+    localStorage.setItem(timeBlockSave, JSON.stringify(content));
+  }) // used jQuery to assign each button to is respective time block
+
+  
+  $('.time-block').each(function(){
+    var currentTime = dayjs().format('h');
+    var timeBlock = $(this).attr('id');
+    if (currentTime > timeBlock) {$(this).addClass('past')}
+    if (currentTime === timeBlock) {$(this).addClass('present')}
+    if (currentTime < timeBlock) {$(this).addClass('future')}
+  }) // used jQuery to select timeblock divs and assign timeblock classes
 });
 
 
@@ -33,7 +41,7 @@ $(function () {
     // useful when saving the description in local storage?
     
 
-    // TODO: Add code to apply the past, present, or future class to each time
+    // DONE: Add code to apply the past, present, or future class to each time
     // block by comparing the id to the current hour. HINTS: How can the id
     // attribute of each time-block be used to conditionally add or remove the
     // past, present, and future classes? How can Day.js be used to get the
