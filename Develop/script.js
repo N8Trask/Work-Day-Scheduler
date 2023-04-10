@@ -15,12 +15,15 @@ $(function () {
 
   
   $('.time-block').each(function(){
-    var currentTime = dayjs().format('h');
+    var currentTime = dayjs().format('HH');
     var timeBlock = $(this).attr('id');
     if (currentTime > timeBlock) {$(this).addClass('past')}
     if (currentTime === timeBlock) {$(this).addClass('present')}
     if (currentTime < timeBlock) {$(this).addClass('future')}
-  }) // used jQuery to select timeblock divs and assign timeblock classes
+    var userInput = $(this).children("textarea");
+    var storedDate = JSON.parse(localStorage.getItem(timeBlock));
+    userInput.text(storedDate); 
+  }); // used jQuery to select timeblock divs and assign timeblock classes with conditional statements. Also used JSON to show saved data in each timeblock
 });
 
 
@@ -48,7 +51,7 @@ $(function () {
     // current hour in 24-hour time?
     
 
-    // TODO: Add code to get any user input that was saved in localStorage and set
+    // DONE: Add code to get any user input that was saved in localStorage and set
     // the values of the corresponding textarea elements. HINT: How can the id
     // attribute of each time-block be used to do this?
     
